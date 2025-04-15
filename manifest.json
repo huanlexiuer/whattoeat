@@ -1,4 +1,5 @@
 {
+  "id": "com.huanlexiuer.whattoeat",
   "name": "今天吃什么",
   "short_name": "今天吃什么",
   "description": "一个帮助你决定今天吃什么的应用",
@@ -70,6 +71,14 @@
       "name": "随机推荐",
       "url": "./index.html?action=random",
       "description": "随机推荐一道美食"
+    }
+  ],
+  "launch_handler": {
+    "client_mode": ["auto", "navigate"]
+  },
+  "scope_extensions": [
+    {
+      "origin": "https://huanlexiuer.github.io"
     }
   ]
 }
