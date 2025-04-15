@@ -693,40 +693,84 @@ option.user-cuisine {
     .card {
         width: 100%;
     }
-    
     .edit-options {
         flex-direction: column;
     }
-    
     .modal-content {
-        width: 95%;
-        padding: 20px;
+        width: 90% !important;
+        padding: 15px !important;
     }
-    
     .random-controls {
         flex-direction: column;
-        align-items: center;
-        gap: 20px;
+        align-items: stretch;
     }
-    
     .large-btn {
         width: 100%;
-        max-width: 300px;
+        margin-bottom: 10px;
     }
-    
     .normal-btn {
-        width: auto;
-        min-width: 180px;
+        width: 100%;
+        margin-bottom: 10px;
     }
-    
     #food-selections {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        max-height: 200px;
     }
-    
     .food-lists-container {
         flex-direction: column;
-        gap: 30px;
     }
+    
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .food-item, .cuisine-item {
+        min-width: 120px;
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 10px;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    main {
+        padding: 15px;
+    }
+    
+    /* 移动端优化的触摸目标 */
+    .btn, .nav-link, .food-item, .cuisine-item, .selection-item, .remove-selection {
+        padding: 12px !important;  /* 增大触摸目标 */
+    }
+}
+
+/* 添加视口元标记确保正确的响应式显示 */
+@media screen and (max-width: 480px) {
+    .food-list, .cuisine-categories, .cuisine-foods {
+        justify-content: center;
+    }
+    
+    header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .nav-link {
+        padding: 8px 10px;
+        margin: 2px 0;
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* 确保图片响应式 */
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 /* 隐藏元素 */
