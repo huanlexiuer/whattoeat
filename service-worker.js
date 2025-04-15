@@ -1,5 +1,5 @@
 // 缓存名称和版本 - 更新版本号以刷新缓存
-const CACHE_NAME = 'whattoeat-v2';
+const CACHE_NAME = 'whattoeat-v3';
 
 // 需要缓存的资源
 const CACHE_ASSETS = [
@@ -45,6 +45,16 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   // 检查是否是导航请求
   if (event.request.mode === 'navigate') {
+    // 保存原始URL，包括hash部分
+    const url = new URL(event.request.url);
+    const hasHash = url.hash.length > 0;
+    
+    // 如果URL中有hash，我们需要保留它
+    if (hasHash) {
+      // 让浏览器正常处理带hash的请求，不拦截
+      return;
+    }
+    
     event.respondWith(
       fetch(event.request)
         .catch(() => {

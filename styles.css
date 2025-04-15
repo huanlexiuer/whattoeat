@@ -317,9 +317,13 @@ h2 {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     margin: 15px auto;
     max-width: calc(100% - 30px);
-    overflow: hidden; /* 修改为hidden防止内容溢出 */
     box-sizing: border-box;
     width: 100%;
+    height: auto; /* 确保高度自适应内容 */
+    min-height: 200px; /* 设置最小高度 */
+    overflow-y: auto; /* 添加垂直滚动条 */
+    max-height: 70vh; /* 限制最大高度 */
+    padding-bottom: 30px; /* 增加底部内边距 */
 }
 
 #takeaway .food-item {
