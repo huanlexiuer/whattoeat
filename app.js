@@ -229,7 +229,15 @@ function init() {
     closeModalBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             const modal = this.closest('.modal');
-            closeModalById(modal.id);
+            if (modal && modal.id) {
+                closeModalById(modal.id);
+            } else {
+                // 如果找不到modal或id，尝试从按钮的data-modal属性获取
+                const modalId = this.getAttribute('data-modal');
+                if (modalId) {
+                    closeModalById(modalId);
+                }
+            }
         });
     });
     

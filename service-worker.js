@@ -1,5 +1,5 @@
 // 缓存名称和版本 - 更新版本号以刷新缓存
-const CACHE_NAME = 'whattoeat-v3';
+const CACHE_NAME = 'whattoeat-v4';
 
 // 需要缓存的资源
 const CACHE_ASSETS = [
@@ -7,12 +7,11 @@ const CACHE_ASSETS = [
   './index.html',
   './styles.css',
   './app.js',
-  './server.js',
   './manifest.json',
-  './images/app-icon-192.PNG',
-  './images/app-icon-512.PNG',
-  './images/weixin.PNG',
-  './images/zhifubao.PNG'
+  './images/app-icon-192.png',
+  './images/app-icon-512.png',
+  './images/weixin.png',
+  './images/zhifubao.png'
 ];
 
 // 安装 Service Worker
@@ -20,7 +19,15 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        return cache.addAll(CACHE_ASSETS);
+        console.log('缓存打开');
+        // 逐个添加资源到缓存，忽略失败的资源
+        return Promise.allSettled(
+          CACHE_ASSETS.map(url => 
+            cache.add(url).catch(error => {
+              console.warn(`无法缓存资源: ${url}`, error);
+            })
+          )
+        );
       })
       .then(() => self.skipWaiting())
   );
