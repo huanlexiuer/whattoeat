@@ -1,5 +1,5 @@
-// 缓存名称和版本
-const CACHE_NAME = 'whattoeat-v1';
+// 缓存名称和版本 - 更新版本号以刷新缓存
+const CACHE_NAME = 'whattoeat-v2';
 
 // 需要缓存的资源
 const CACHE_ASSETS = [
@@ -43,6 +43,17 @@ self.addEventListener('activate', event => {
 
 // 拦截请求
 self.addEventListener('fetch', event => {
+  // 检查是否是导航请求
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .catch(() => {
+          return caches.match('./index.html');
+        })
+    );
+    return; // 导航请求已处理，不继续执行
+  }
+  
   event.respondWith(
     // 尝试从缓存获取资源
     caches.match(event.request)
@@ -77,22 +88,6 @@ self.addEventListener('fetch', event => {
         if (event.request.url.includes('.html')) {
           return caches.match('./index.html');
         }
-      })
-  );
-});
-
-// 处理导航请求
-self.addEventListener('navigate', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request)
-          .catch(() => {
-            return caches.match('./index.html');
-          });
       })
   );
 });
