@@ -1,0 +1,71 @@
+{
+  "name": "whattoeat-app",
+  "productName": "今天吃什么",
+  "version": "1.0.0",
+  "description": "帮助你解决今天吃什么难题的应用",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "dist-win": "electron-builder --win",
+    "dist-mac": "electron-builder --mac",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "keywords": [
+    "食物",
+    "选择",
+    "随机",
+    "美食"
+  ],
+  "author": "您的名字 <your@email.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^25.0.0",
+    "electron-builder": "^24.3.0"
+  },
+  "build": {
+    "appId": "com.yourdomain.whattoeat",
+    "productName": "今天吃什么",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "../*.html",
+      "../*.css",
+      "../*.js",
+      "../image/**/*",
+      "../manifest.json",
+      "../service-worker.js",
+      "!**/node_modules/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.lifestyle",
+      "target": [
+        "dmg"
+      ],
+      "icon": "../image/app-icon-512.jpg"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "appx"
+      ],
+      "icon": "../image/app-icon-512.jpg"
+    },
+    "appx": {
+      "applicationId": "WhatToEatApp",
+      "backgroundColor": "#ff6b6b",
+      "identityName": "YourCompanyWhatToEatApp",
+      "publisher": "CN=YourPublisherID",
+      "publisherDisplayName": "Your Company Name"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+} 

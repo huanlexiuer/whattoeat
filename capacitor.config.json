@@ -1,0 +1,37 @@
+{
+  "appId": "com.yourdomain.whattoeat",
+  "appName": "今天吃什么",
+  "webDir": "./",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 3000,
+      "launchAutoHide": true,
+      "backgroundColor": "#ff6b6b",
+      "androidSplashResourceName": "splash",
+      "androidScaleType": "CENTER_CROP",
+      "showSpinner": false,
+      "splashFullScreen": true,
+      "splashImmersive": false
+    },
+    "LocalNotifications": {
+      "smallIcon": "ic_stat_whattoeat",
+      "iconColor": "#ff6b6b"
+    }
+  },
+  "ios": {
+    "contentInset": "always",
+    "cordovaSwiftVersion": "5.1",
+    "minVersion": "13.0",
+    "preferredContentMode": "mobile"
+  },
+  "android": {
+    "allowMixedContent": false,
+    "captureInput": true,
+    "initialFocus": true,
+    "webContentsDebuggingEnabled": false
+  }
+} 

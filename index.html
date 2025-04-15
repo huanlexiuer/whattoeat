@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今天吃什么</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ff6b6b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="今天吃什么">
+    <link rel="apple-touch-icon" href="image/app-icon-192.jpg">
+    <meta name="description" content="帮助你解决"今天吃什么"难题的应用">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>今天吃什么</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link active" data-page="home">首页</a></li>
+                    <li><a href="#" class="nav-link" data-page="takeaway">常见外卖</a></li>
+                    <li><a href="#" class="nav-link" data-page="cuisines">各系菜肴</a></li>
+                    <li><a href="#" class="nav-link" data-page="history">修改记录</a></li>
+                    <li><a href="#" class="nav-link" data-page="reset">恢复默认</a></li>
+                    <li><a href="#" class="nav-link" data-page="donate">捐助我</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <!-- 首页（已合并随机选择功能） -->
+            <section id="home" class="page active">
+                <h2>今天吃什么</h2>
+                <p>这个应用可以帮你解决每天"吃什么"的难题！</p>
+                
+                <div class="random-result">
+                    <div id="food-display">点击下方按钮开始</div>
+                </div>
+                <div class="random-controls">
+                    <button id="start-random" class="btn primary large-btn">已选美食随机</button>
+                    <button id="start-random-all" class="btn primary large-btn">全部随机</button>
+                </div>
+                <div class="edit-controls">
+                    <button id="edit-foods" class="btn secondary normal-btn">
+                        <span class="edit-icon">✏️</span> 修改美食选项
+                    </button>
+                </div>
+            </section>
+
+            <!-- 常见外卖页面 -->
+            <section id="takeaway" class="page">
+                <h2>常见外卖</h2>
+                <div class="page-actions">
+                    <button id="edit-takeaway" class="btn secondary">编辑外卖选项</button>
+                </div>
+                <div class="food-list">
+                    <!-- 外卖选项将由JavaScript动态生成 -->
+                </div>
+            </section>
+
+            <!-- 各系菜肴页面 -->
+            <section id="cuisines" class="page">
+                <h2>各系菜肴</h2>
+                <div class="page-actions">
+                    <button id="edit-cuisines" class="btn secondary">编辑菜肴选项</button>
+                </div>
+                <div class="cuisine-categories">
+                    <!-- 菜系类别将由JavaScript动态生成 -->
+                </div>
+                <div class="cuisine-foods">
+                    <!-- 选定菜系的食物将由JavaScript动态生成 -->
+                </div>
+            </section>
+
+            <!-- 修改记录页面 -->
+            <section id="history" class="page">
+                <h2>美食修改记录</h2>
+                <div class="food-lists-container vertical">
+                    <div class="food-list-column">
+                        <h3>添加的美食</h3>
+                        <div class="food-list added-foods-list">
+                            <!-- 添加的美食将由JavaScript动态生成 -->
+                        </div>
+                    </div>
+                    <div class="food-list-column">
+                        <h3>删除的美食</h3>
+                        <div class="food-list deleted-foods-list">
+                            <!-- 删除的美食将由JavaScript动态生成 -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 恢复默认设置页面 -->
+            <section id="reset" class="page">
+                <h2>恢复默认设置</h2>
+                <p>点击下方按钮将恢复应用的所有默认设置，包括外卖、菜系和随机选择列表。</p>
+                <div class="reset-container">
+                    <button id="reset-defaults" class="btn warning">恢复默认设置</button>
+                </div>
+            </section>
+
+            <!-- 捐助我页面 -->
+            <section id="donate" class="page">
+                <h2>捐助我</h2>
+                <p>如果这个应用对您有帮助，请考虑捐助我，以支持我继续开发更多实用工具。</p>
+                <div class="donate-container">
+                    <div class="donate-item">
+                        <h3>微信支付</h3>
+                        <div class="donate-qrcode">
+                            <img src="image/weixin.jpg" alt="微信收款码" class="qrcode-img">
+                        </div>
+                    </div>
+                    <div class="donate-item">
+                        <h3>支付宝</h3>
+                        <div class="donate-qrcode">
+                            <img src="image/zhifubao.jpg" alt="支付宝收款码" class="qrcode-img">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 编辑食物选项的弹窗 -->
+        <div id="edit-modal" class="modal">
+            <div class="modal-content">
+                <h2>修改美食选项</h2>
+                <span class="close-modal" data-modal="edit-modal">&times;</span>
+                
+                <!-- 当前选择部分 -->
+                <div class="current-selections clean-border">
+                    <h3>已选美食</h3>
+                    <ul id="food-selections">
+                        <!-- 当前选择的食物将由JavaScript动态生成 -->
+                    </ul>
+                </div>
+                
+                <!-- 从列表中选择部分 -->
+                <div class="edit-section selection-section">
+                    <h3>从列表中选择</h3>
+                    
+                    <!-- 搜索框 -->
+                    <div class="search-container">
+                        <input type="text" id="food-search" class="search-input" placeholder="搜索美食...">
+                    </div>
+                    
+                    <!-- 外卖/菜肴选择按钮 -->
+                    <div class="select-type-container">
+                        <button id="select-takeaway" class="select-type-btn active">外卖</button>
+                        <button id="select-cuisines" class="select-type-btn">菜肴</button>
+                    </div>
+                    
+                    <!-- 外卖列表容器 -->
+                    <div id="takeaway-container" class="food-container active">
+                        <div class="food-list-container">
+                            <!-- 外卖选项将由JavaScript动态生成 -->
+                        </div>
+                    </div>
+                    
+                    <!-- 菜肴列表容器 -->
+                    <div id="cuisines-container" class="food-container">
+                        <!-- 菜系分类 -->
+                        <div class="cuisine-categories">
+                            <!-- 菜系类别将由JavaScript动态生成 -->
+                        </div>
+                        <!-- 菜系对应的菜肴 -->
+                        <div class="cuisine-foods">
+                            <!-- 选定菜系的食物将由JavaScript动态生成 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 编辑外卖选项的弹窗 -->
+        <div id="edit-takeaway-modal" class="modal">
+            <div class="modal-content">
+                <h2>编辑外卖选项</h2>
+                <span class="close-modal" data-modal="edit-takeaway-modal">&times;</span>
+                <div class="edit-options clean-margin">
+                    <div class="manual-input">
+                        <h3>添加新外卖</h3>
+                        <input type="text" id="new-takeaway" placeholder="输入外卖名称">
+                        <button id="add-takeaway" class="btn primary">添加</button>
+                        <div class="save-btn-container">
+                            <button id="save-takeaway-selections" class="btn primary save-btn">保存</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="current-selections clean-border">
+                    <h3>当前外卖选项</h3>
+                    <ul id="takeaway-selections">
+                        <!-- 当前外卖选项将由JavaScript动态生成 -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 编辑菜肴选项的弹窗 -->
+        <div id="edit-cuisines-modal" class="modal">
+            <div class="modal-content">
+                <h2>编辑菜肴选项</h2>
+                <span class="close-modal" data-modal="edit-cuisines-modal">&times;</span>
+                <div class="edit-options clean-margin">
+                    <div class="cuisine-selector">
+                        <h3>选择菜系</h3>
+                        <select id="cuisine-select">
+                            <!-- 菜系选项将由JavaScript动态生成 -->
+                        </select>
+                        <div class="cuisine-management">
+                            <button id="add-cuisine-type" class="btn secondary small-btn">新增菜系</button>
+                            <button id="edit-cuisine-type" class="btn secondary small-btn">编辑当前菜系</button>
+                            <button id="delete-cuisine-type" class="btn warning small-btn">删除当前菜系</button>
+                        </div>
+                    </div>
+                    <div class="manual-input">
+                        <h3>添加新菜肴</h3>
+                        <input type="text" id="new-cuisine-food" placeholder="输入菜肴名称">
+                        <button id="add-cuisine-food" class="btn primary">添加</button>
+                        <div class="save-btn-container">
+                            <button id="save-cuisine-selections" class="btn primary save-btn">保存</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="current-selections clean-border">
+                    <h3>当前菜肴选项</h3>
+                    <ul id="cuisine-food-selections">
+                        <!-- 当前菜肴选项将由JavaScript动态生成 -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 新增菜系弹窗 -->
+        <div id="add-cuisine-modal" class="modal">
+            <div class="modal-content">
+                <h2>新增菜系</h2>
+                <span class="close-modal" data-modal="add-cuisine-modal">&times;</span>
+                <div class="cuisine-input-container">
+                    <input type="text" id="new-cuisine-name" placeholder="输入菜系名称">
+                    <button id="save-new-cuisine" class="btn primary">保存</button>
+                    <button id="cancel-new-cuisine" class="btn secondary">取消</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 编辑菜系弹窗 -->
+        <div id="edit-cuisine-modal" class="modal">
+            <div class="modal-content">
+                <h2>编辑菜系</h2>
+                <span class="close-modal" data-modal="edit-cuisine-modal">&times;</span>
+                <div class="cuisine-input-container">
+                    <input type="text" id="edit-cuisine-name" placeholder="输入新的菜系名称">
+                    <button id="save-edit-cuisine" class="btn primary">保存</button>
+                    <button id="cancel-edit-cuisine" class="btn secondary">取消</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 确认弹窗 -->
+        <div id="confirm-modal" class="modal">
+            <div class="modal-content">
+                <h2>确认操作</h2>
+                <span class="close-modal" data-modal="confirm-modal">&times;</span>
+                <p id="confirm-message"></p>
+                <div class="confirm-buttons">
+                    <button id="confirm-yes" class="btn primary">确认</button>
+                    <button id="confirm-no" class="btn secondary">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // 注册Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(reg => console.log('Service Worker 注册成功:', reg.scope))
+                    .catch(err => console.log('Service Worker 注册失败:', err));
+            });
+        }
+    </script>
+</body>
+</html> 
