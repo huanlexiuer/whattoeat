@@ -3,16 +3,16 @@ const CACHE_NAME = 'whattoeat-v1';
 
 // 需要缓存的资源
 const CACHE_ASSETS = [
-  './whattoeat/',
-  './whattoeat/index.html',
-  './whattoeat/styles.css',
-  './whattoeat/app.js',
-  './whattoeat/server.js',
-  './whattoeat/manifest.json',
-  './whattoeat/image/app-icon-192.png',
-  './whattoeat/image/app-icon-512.png',
-  './whattoeat/image/weixin.jpg',
-  './whattoeat/image/zhifubao.jpg'
+  './',
+  './index.html',
+  './styles.css',
+  './app.js',
+  './server.js',
+  './manifest.json',
+  './image/app-icon-192.png',
+  './image/app-icon-512.png',
+  './image/weixin.png',
+  './image/zhifubao.png'
 ];
 
 // 安装 Service Worker
