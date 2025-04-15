@@ -9,10 +9,10 @@ const CACHE_ASSETS = [
   './app.js',
   './server.js',
   './manifest.json',
-  './image/app-icon-192.PNG',
-  './image/app-icon-512.PNG',
-  './image/weixin.PNG',
-  './image/zhifubao.PNG'
+  './images/app-icon-192.PNG',
+  './images/app-icon-512.PNG',
+  './images/weixin.PNG',
+  './images/zhifubao.PNG'
 ];
 
 // 安装 Service Worker
