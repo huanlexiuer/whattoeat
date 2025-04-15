@@ -8,13 +8,13 @@
   "theme_color": "#4CAF50",
   "icons": [
     {
-      "src": "./image/app-icon-192.png",
+      "src": "./images/app-icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "./image/app-icon-512.png",
+      "src": "./images/app-icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -22,35 +22,35 @@
   ],
   "screenshots": [
     {
-      "src": "./image/whattoeat.png",
+      "src": "./images/whattoeat.png",
       "sizes": "1280x720",
       "type": "image/png",
       "platform": "wide",
       "label": "首页界面"
     },
     {
-      "src": "./image/2-changjianwaimai.png",
+      "src": "./images/2-changjianwaimai.png",
       "sizes": "1280x720",
       "type": "image/png",
       "platform": "wide",
       "label": "常见外卖页面"
     },
     {
-      "src": "./image/3-gexicaiyao.png",
+      "src": "./images/3-gexicaiyao.png",
       "sizes": "1280x720",
       "type": "image/png",
       "platform": "wide",
       "label": "各系菜肴页面"
     },
     {
-      "src": "./image/4-xiugaijilu.png",
+      "src": "./images/4-xiugaijilu.png",
       "sizes": "1280x720",
       "type": "image/png",
       "platform": "wide",
       "label": "修改记录页面"
     },
     {
-      "src": "./image/5-huifumoren.png",
+      "src": "./images/5-huifumoren.png",
       "sizes": "1280x720",
       "type": "image/png",
       "platform": "wide",
