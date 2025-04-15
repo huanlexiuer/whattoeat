@@ -84,9 +84,15 @@ self.addEventListener('fetch', event => {
 // 处理导航请求
 self.addEventListener('navigate', event => {
   event.respondWith(
-    fetch(event.request)
-      .catch(() => {
-        return caches.match('./index.html');
+    caches.match(event.request)
+      .then(response => {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request)
+          .catch(() => {
+            return caches.match('./index.html');
+          });
       })
   );
 });
