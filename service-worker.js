@@ -55,6 +55,19 @@ self.addEventListener('fetch', event => {
       return;
     }
     
+    // 检查URL路径是否指向特定页面
+    const pathname = url.pathname;
+    const isSpecificPage = pathname.includes('takeaway') || 
+                          pathname.includes('cuisines') || 
+                          pathname.includes('history') || 
+                          pathname.includes('reset') || 
+                          pathname.includes('donate');
+    
+    // 如果是特定页面的请求，不进行拦截
+    if (isSpecificPage) {
+      return;
+    }
+    
     event.respondWith(
       fetch(event.request)
         .catch(() => {

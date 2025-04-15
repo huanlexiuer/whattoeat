@@ -203,14 +203,22 @@ function init() {
     renderCuisinesPage();
     renderHistoryPage();
     
+    // 检查URL hash并导航到相应页面
+    checkUrlAndNavigate();
+    
     // 注册事件监听
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const targetPage = this.getAttribute('data-page');
             navigateTo(targetPage);
+            // 更新URL hash
+            window.location.hash = targetPage;
         });
     });
+    
+    // 监听hash变化事件
+    window.addEventListener('hashchange', checkUrlAndNavigate);
     
     startRandomBtn.addEventListener('click', startRandomSelection);
     startRandomAllBtn.addEventListener('click', startRandomAllSelection);
@@ -281,6 +289,23 @@ function navigateTo(pageId) {
             page.classList.remove('active');
         }
     });
+    
+    // 更新URL hash，但不触发hashchange事件
+    if (window.location.hash !== '#' + pageId) {
+        history.replaceState(null, null, '#' + pageId);
+    }
+}
+
+// 检查URL hash并导航到相应页面
+function checkUrlAndNavigate() {
+    const hash = window.location.hash.substring(1); // 去掉#号
+    if (hash) {
+        // 检查hash是否对应有效页面
+        const validPages = ['home', 'takeaway', 'cuisines', 'history', 'reset', 'donate'];
+        if (validPages.includes(hash)) {
+            navigateTo(hash);
+        }
+    }
 }
 
 // 从已选美食中随机选择
@@ -1723,4 +1748,4 @@ function getCurrentCuisine() {
 }
 
 // 页面加载完成后初始化应用
-document.addEventListener('DOMContentLoaded', init); 
+document.addEventListener('DOMContentLoaded', init);

@@ -316,7 +316,7 @@ h2 {
     border-radius: var(--border-radius);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     margin: 15px auto;
-    max-width: calc(100% - 30px);
+    max-width: 100%;
     box-sizing: border-box;
     width: 100%;
     height: auto; /* 确保高度自适应内容 */
@@ -324,6 +324,7 @@ h2 {
     overflow-y: auto; /* 添加垂直滚动条 */
     max-height: 70vh; /* 限制最大高度 */
     padding-bottom: 30px; /* 增加底部内边距 */
+    overflow-x: hidden; /* 防止水平溢出 */
 }
 
 #takeaway .food-item {
