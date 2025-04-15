@@ -1,5 +1,5 @@
 // 缓存名称和版本 - 更新版本号以刷新缓存
-const CACHE_NAME = 'whattoeat-v4';
+const CACHE_NAME = 'whattoeat-v5';
 
 // 需要缓存的资源
 const CACHE_ASSETS = [
@@ -21,13 +21,24 @@ self.addEventListener('install', event => {
       .then(cache => {
         console.log('缓存打开');
         // 逐个添加资源到缓存，忽略失败的资源
-        return Promise.allSettled(
-          CACHE_ASSETS.map(url => 
-            cache.add(url).catch(error => {
-              console.warn(`无法缓存资源: ${url}`, error);
+        const cachePromises = CACHE_ASSETS.map(url => {
+          // 尝试请求资源并缓存，如果失败则忽略该资源
+          return fetch(url)
+            .then(response => {
+              if (response.ok) {
+                return cache.put(url, response);
+              } else {
+                console.warn(`资源请求失败，无法缓存: ${url}, 状态码: ${response.status}`);
+                return Promise.resolve(); // 忽略错误，继续后续缓存
+              }
             })
-          )
-        );
+            .catch(error => {
+              console.warn(`缓存资源时出错: ${url}`, error);
+              return Promise.resolve(); // 忽略网络错误，继续后续缓存
+            });
+        });
+        
+        return Promise.allSettled(cachePromises);
       })
       .then(() => self.skipWaiting())
   );

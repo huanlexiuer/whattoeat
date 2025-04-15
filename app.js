@@ -376,12 +376,13 @@ function startRandomAllSelection() {
 // 打开编辑模态框
 function openEditModal() {
     const modal = document.getElementById('edit-modal');
+    if (!modal) {
+        console.error("找不到编辑模态框元素，可能是DOM尚未加载完成");
+        return;
+    }
     
     // 渲染内容
     renderEditModal();
-    
-    // 显示模态框
-    modal.classList.add('active');
 }
 
 // 打开编辑外卖模态框
@@ -848,8 +849,15 @@ function renderCuisineFoods(cuisine) {
         // 菜系页面内调用
         foodsContainer = pageContainer;
     } else {
-        console.error("找不到合适的食物容器");
-        return;
+        // 尝试直接使用可见的容器
+        if (modalContainer) {
+            foodsContainer = modalContainer;
+        } else if (pageContainer) {
+            foodsContainer = pageContainer;
+        } else {
+            console.error("找不到合适的食物容器");
+            return;
+        }
     }
     
     if (!foodsContainer) return;
@@ -947,9 +955,19 @@ function renderHistoryPage() {
 // 渲染编辑模态框
 function renderEditModal() {
     const modal = document.getElementById('edit-modal');
+    if (!modal) {
+        console.error("找不到编辑模态框元素，可能是DOM尚未加载完成");
+        return;
+    }
+    
     modal.classList.add('active');
     
     const modalContent = document.querySelector('#edit-modal .modal-content');
+    if (!modalContent) {
+        console.error("找不到模态框内容元素");
+        return;
+    }
+    
     modalContent.innerHTML = `
         <h2>修改美食选项</h2>
         <span class="close-modal" data-modal="edit-modal">&times;</span>
@@ -1015,11 +1033,14 @@ function renderEditModal() {
     renderFoodSelections();
     
     // 添加搜索功能
-    document.getElementById('food-search').addEventListener('input', function() {
-        const searchTerm = this.value;
-        // 搜索全部美食
-        searchAllFoods(searchTerm);
-    });
+    const searchInput = document.getElementById('food-search');
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value;
+            // 搜索全部美食
+            searchAllFoods(searchTerm);
+        });
+    }
 }
 
 // 渲染外卖列表
