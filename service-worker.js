@@ -74,9 +74,19 @@ self.addEventListener('fetch', event => {
       })
       .catch(() => {
         // 当网络和缓存都失败时的回退处理
-        if (event.request.url.indexOf('.html') > -1) {
-          return caches.match('/start.html');
+        if (event.request.url.includes('.html')) {
+          return caches.match('./index.html');
         }
+      })
+  );
+});
+
+// 处理导航请求
+self.addEventListener('navigate', event => {
+  event.respondWith(
+    fetch(event.request)
+      .catch(() => {
+        return caches.match('./index.html');
       })
   );
 });

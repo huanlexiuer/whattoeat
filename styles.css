@@ -311,7 +311,21 @@ h2 {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 15px;
-    padding: 15px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    max-width: calc(100% - 40px);
+    overflow: hidden;
+}
+
+#takeaway .food-item {
+    background-color: #fff8f0;
+    border-left: 3px solid var(--accent-color);
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .cuisine-foods .food-item {
@@ -1301,6 +1315,7 @@ option.user-cuisine {
     font-weight: normal;
     color: var(--secondary-color);
     background-color: #f0f8ff;
+    border-left: 2px solid var(--secondary-color);
 }
 
 /* 食物类型选择器 */
@@ -1384,4 +1399,4 @@ option.user-cuisine {
     max-width: 100%;
     height: auto;
     border-radius: 4px;
-} 
+}

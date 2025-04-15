@@ -34,6 +34,13 @@
       "type": "image/png",
       "platform": "narrow",
       "label": "随机推荐功能"
+    },
+    {
+      "src": "./image/whattoeat.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "美食选择界面"
     }
   ],
   "orientation": "any",
