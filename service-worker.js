@@ -1,5 +1,5 @@
 // 缓存名称和版本 - 更新版本号以刷新缓存
-const CACHE_NAME = 'whattoeat-v5';
+const CACHE_NAME = 'whattoeat-v6';
 
 // 需要缓存的资源
 const CACHE_ASSETS = [
@@ -7,6 +7,7 @@ const CACHE_ASSETS = [
   './index.html',
   './styles.css',
   './app.js',
+  './all.js',
   './manifest.json',
   './images/app-icon-192.png',
   './images/app-icon-512.png',
@@ -59,6 +60,28 @@ self.addEventListener('activate', event => {
   );
 });
 
+// 检查URL是否为有效的缓存目标
+function isValidCacheUrl(url) {
+  // 解析URL
+  try {
+    const parsedUrl = new URL(url);
+    // 排除chrome-extension和data URLs
+    if (parsedUrl.protocol === 'chrome-extension:' || 
+        parsedUrl.protocol === 'data:' ||
+        parsedUrl.protocol === 'file:') {
+      return false;
+    }
+    // 只缓存当前域名下的资源
+    if (self.location.hostname && parsedUrl.hostname !== self.location.hostname) {
+      return false;
+    }
+    return true;
+  } catch (e) {
+    console.warn('URL解析失败:', url, e);
+    return false;
+  }
+}
+
 // 拦截请求
 self.addEventListener('fetch', event => {
   // 检查是否是导航请求
@@ -95,6 +118,12 @@ self.addEventListener('fetch', event => {
     return; // 导航请求已处理，不继续执行
   }
   
+  // 检查请求URL是否可以缓存
+  if (!isValidCacheUrl(event.request.url)) {
+    // 对于不能缓存的URL，直接返回fetch结果，不尝试缓存
+    return;
+  }
+  
   event.respondWith(
     // 尝试从缓存获取资源
     caches.match(event.request)
@@ -112,13 +141,22 @@ self.addEventListener('fetch', event => {
               return networkResponse;
             }
             
+            // 检查URL是否可以缓存
+            if (!isValidCacheUrl(event.request.url)) {
+              return networkResponse;
+            }
+            
             // 克隆响应，因为响应是流，只能使用一次
             const responseToCache = networkResponse.clone();
             
             // 将新资源添加到缓存
             caches.open(CACHE_NAME)
               .then(cache => {
-                cache.put(event.request, responseToCache);
+                try {
+                  cache.put(event.request, responseToCache);
+                } catch (e) {
+                  console.warn('缓存资源失败:', event.request.url, e);
+                }
               });
               
             return networkResponse;
