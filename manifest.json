@@ -22,25 +22,39 @@
   ],
   "screenshots": [
     {
-      "src": "./image/app-screenshot1.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "platform": "wide",
-      "label": "应用主界面"
-    },
-    {
-      "src": "./image/app-screenshot2.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "platform": "narrow",
-      "label": "随机推荐功能"
-    },
-    {
       "src": "./image/whattoeat.png",
       "sizes": "1280x720",
       "type": "image/png",
       "platform": "wide",
-      "label": "美食选择界面"
+      "label": "首页界面"
+    },
+    {
+      "src": "./image/2-changjianwaimai.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "常见外卖页面"
+    },
+    {
+      "src": "./image/3-gexicaiyao.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "各系菜肴页面"
+    },
+    {
+      "src": "./image/4-xiugaijilu.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "修改记录页面"
+    },
+    {
+      "src": "./image/5-huifumoren.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "恢复默认页面"
     }
   ],
   "orientation": "any",
