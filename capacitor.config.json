@@ -1,5 +1,5 @@
 {
-  "appId": "com.yourdomain.whattoeat",
+  "appId": "com.huanlexiuer.whattoeat",
   "appName": "今天吃什么",
   "webDir": "./",
   "bundledWebRuntime": false,
@@ -34,4 +34,4 @@
     "initialFocus": true,
     "webContentsDebuggingEnabled": false
   }
-} 
+}
