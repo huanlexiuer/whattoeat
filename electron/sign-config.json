@@ -1,0 +1,20 @@
+{
+  "keystore": {
+    "alias": "whattoeat",
+    "password": "whattoeat2025",
+    "keyPassword": "whattoeat2025",
+    "validity": 10000,
+    "distinguishedName": {
+      "commonName": "今天吃什么",
+      "organizationUnit": "Development",
+      "organizationName": "huanlexiuer",
+      "localityName": "shijiazhuang",
+      "stateName": "hebei",
+      "countryCode": "CN"
+    }
+  },
+  "apkPath": "dist/今天吃什么.apk",
+  "keystorePath": "whattoeat.keystore",
+  "signingAlgorithm": "SHA256withRSA",
+  "digestAlgorithm": "SHA-256"
+}
